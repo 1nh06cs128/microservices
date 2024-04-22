@@ -5,5 +5,12 @@
 
 yarn.lock
 
+.env
+
+
+
+.env.dev
+
+.env.*
 
 app.log
