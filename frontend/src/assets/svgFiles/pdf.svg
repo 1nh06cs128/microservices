@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#000000" className="w-6 h-6">
+  <polyline points="15.33 4.67 15.33 9.33 18.67 9.33"/>
+  <polygon points="18.67 9.33 15.33 4.67 6 4.67 6 19.33 18.67 19.33 18.67 9.33"/>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M13.22 8.08C7.37 10 29.51 30.71 31 23.8s-26.33 2.89-21.41 7.68 11.48-25.27 4.63-23.4"/>
+</svg>

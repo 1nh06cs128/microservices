@@ -1,0 +1,39 @@
+{
+    "name": "Users",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "NODE_ENV=prod node src/index.js",
+        "dev": "NODE_ENV=dev nodemon --trace-warnings src/index.js",
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.529.1",
+        "@aws-sdk/credential-provider-ini": "^3.533.0",
+        "@aws-sdk/lib-dynamodb": "^3.529.1",
+        "@aws-sdk/util-dynamodb": "^3.533.0",
+        "amqplib": "^0.10.3",
+        "aws-sdk": "^2.1576.0",
+        "axios": "^1.6.7",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "dynamodb-toolbox": "^0.9.2",
+        "dynamoose": "^4.0.0",
+        "express": "^4.18.3",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.2.1",
+        "nanoid": "^5.0.6",
+        "nodemon": "^3.1.0",
+        "path": "^0.12.7",
+        "xmlbuilder": "^15.1.1"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0"
+    }
+}

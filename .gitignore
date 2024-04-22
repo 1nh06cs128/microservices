@@ -1,0 +1,9 @@
+# irrespective of folder this topmost .gitignore ignores inside backend, frontend, others
+
+*/node_modules/
+.aws/
+
+yarn.lock
+
+
+app.log
