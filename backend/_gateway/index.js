@@ -1,8 +1,10 @@
+const { AppLogger, CallPointInfo } = require('../../others/advanceLog');
+AppLogger.emit('start', '**** STARTING FRESH ****', CallPointInfo(), 'red');
+
 const express = require("express");
 const cors = require("cors");
 const proxy = require("express-http-proxy");
 
-const { AppLogger, CallPointInfo } = require('../../others/advanceLog');
 
 const app = express();
 
