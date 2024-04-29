@@ -13,6 +13,10 @@ class Logger extends EventEmitter {
     }
 
     initialize() {
+        // Check if the log file exists, if not, create it
+        if (!fs.existsSync(this.logFilePath)) {
+            fs.writeFileSync(this.logFilePath, ''); // Create an empty log file
+        }
         const formatLog = (type, message, callingPointInfo) => {
             const formattedType = `[${type.toUpperCase()}]`;
             const formattedTime = `[${new Date().toLocaleString()}]`;
@@ -37,6 +41,42 @@ class Logger extends EventEmitter {
             return `\n${prefix}${baseFolder}${' '.repeat(byCount)}${callingPointInfo}\n${message}`;
         };
 
+        this.on('start', (message, callingPointInfo, color) => {
+            const logMessage = formatLog('info', message, callingPointInfo);
+            
+            // Define the characters for each row of the letters
+            const letters = {
+                A: ['  *  ', ' * * ', '*****', '*   *', '*   *'],
+                F: ['*****', '*    ', '*****', '*    ', '*    '],
+                G: ['*****', '*    ', '* ***', '* * *', '*****'],
+                I: ['*****', '  *  ', '  *  ', '  *  ', '*****'],
+                N: ['*   *', '**  *', '* * *', '*  **', '*   *'],
+                O: ['*****', '*   *', '*   *', '*   *', '*****'],
+                P: ['*****', '*   *', '*****', '*    ', '*    '],
+                R: ['*****', '*   *', '*****', '*   *', '*   *'],
+                S: ['*****', '*    ', '*****', '    *', '*****'],
+                T: ['*****', '  *  ', '  *  ', '  *  ', '  *  '],
+            };
+        
+            // Print each row of the letters
+            let startLetters = '';
+            for (let i = 0; i < 5; i++) {
+                startLetters += `${letters.S[i]}  ${letters.T[i]}  ${letters.A[i]}  ${letters.R[i]}  ${letters.T[i]}  ${letters.I[i]}  ${letters.N[i]}  ${letters.G[i]}      ${letters.A[i]}  ${letters.P[i]}  ${letters.P[i]}\n`;
+            }
+
+            // console.log('\n\n'); // Line Indentation
+            console.info(colors[color ? color : 'white']('\n\n' + startLetters)); // STARTING APP
+            fs.appendFileSync(this.logFilePath, '\n\n' + startLetters + logMessage);
+        });
+        
+/*
+        this.on('start', (message, callingPointInfo, color) => {
+            const logMessage = formatLog('info', message, callingPointInfo);
+            const preFix = '\n\n\n' + '== Start of Action ==\n'; // Define a nice prefix
+            console.info(colors[color ? color : 'white'](preFix + logMessage)); // Log with prefix
+            fs.appendFileSync(this.logFilePath, preFix + '\n' + logMessage + '\n');
+        });
+*/
         // Event listeners for 'debug', 'error', and 'warn' events
         this.on('info', (message, callingPointInfo, color) => {
             const logMessage = formatLog('info', message, callingPointInfo);
@@ -141,8 +181,37 @@ function forFunctions(func) {
     return LogPerformance(null, null, func);
 }
 
-const logFile = path.join(os.homedir(), '/Desktop/playground/microservices/backend/app.log');
+// Function to get current date in ddmmyy format
+const getCurrentDate = () => {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yy = String(now.getFullYear()).slice(-2);
+    return dd + mm + yy;
+};
 
-const AppLogger = new Logger(logFile);
+// const logFile = path.join(os.homedir(), '/Desktop/playground/microservices/backend/app.log');
+const logFileName = `../../Applogs/${getCurrentDate()}.log`;
+
+// const logFileName = '../../logs/app.log';
+// const logFilePathUp = path.join('../../', logFileName);
+// console.log(logFilePathUp, process.cwd(), path.basename(process.cwd()));
+
+const logFilePath = path.join(process.cwd(), logFileName);
+console.log(process.cwd(), path.basename(process.cwd()));
+console.log(logFilePath);
+
+const createLogsDirectory = () => {
+    const logsDirectory = path.dirname(logFilePath);
+    if (!fs.existsSync(logsDirectory)) {
+        fs.mkdirSync(logsDirectory, { recursive: true });
+    }
+};
+
+// Call the function to create 'logs' directory if it doesn't exist
+createLogsDirectory();
+
+const AppLogger = new Logger(logFilePath);
+
 // module.exports = AppLogger;
 module.exports = { AppLogger, CallPointInfo, forMethods, forFunctions };
