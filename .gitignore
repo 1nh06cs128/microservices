@@ -13,4 +13,6 @@ yarn.lock
 
 .env.*
 
-app.log
+logs/
+Applogs/
+*.log

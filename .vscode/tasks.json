@@ -1,0 +1,109 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Gateway",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/_gateway"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Products On MongoDB",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/productsOnMongoDB"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Products On DynamoDB",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/productsOnDynamoDB"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Users On MongoDB",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/usersOnDynamoDB"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Users On DynamoDB",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/usersOnMongoDB"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Settings",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/settings"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "FrontEnd",
+            "type": "shell",
+            "command": "if [ -d 'node_modules' ]; then rm -rf node_modules/ ; fi && npm install && npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Start Microservices",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Gateway",
+                "Products On MongoDB",
+                "Products On DynamoDB",
+                "Users On MongoDB",
+                "Users On DynamoDB",
+                "FrontEnd"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
